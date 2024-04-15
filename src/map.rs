@@ -127,6 +127,10 @@ impl StoreMap {
         let itertor_key = self.generate_itertor_key(key);
         ctx.new_iterator_prefix_with_key(&itertor_key)
     }
+    
+    pub fn get_map_name(&self) -> &str {
+        self.name.as_str()
+    }
 
     fn save(&self, ctx: &impl SimContext, state_key: &str) -> Result<(), String> {
         let store_map_bytes = serde_json::to_vec(self).unwrap();
@@ -151,15 +155,15 @@ impl StoreMap {
         None
     }
 
-    fn generate_key(&self, key: &Vec<String>) -> (String, String) {
+    fn generate_key(&self, keys: &Vec<String>) -> (String, String) {
         let mut field = get_hash(self.name.as_bytes());
-        for k in key {
+        for k in keys {
             field.push_str(k);
             field = get_hash(field.as_bytes());
         }
 
         let mut gened_key = self.name.clone();
-        gened_key.push_str(key.join(KEYS_CONNECTOR).as_str());
+        gened_key.push_str(keys.join(KEYS_CONNECTOR).as_str());
 
         (gened_key, field)
     }

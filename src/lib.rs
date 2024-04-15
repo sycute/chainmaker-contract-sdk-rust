@@ -12,3 +12,4 @@ pub mod sim_context_bulletproofs;
 pub mod sim_context_paillier;
 pub mod sim_context_rs;
 pub mod vec_box;
+pub mod address;
