@@ -5,3 +5,7 @@ pub const ZERO_ADDR_SKI_HEX: &str = "";
 pub fn is_zero_ski_hex_address(address: &str) -> bool {
     address == ZERO_ADDR_SKI_HEX
 }
+
+pub fn is_zero_address(address: &str) -> bool {
+    address == ZERO_ADDR
+}
